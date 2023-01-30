@@ -27,7 +27,7 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 //----------------------------------------------------------------------------------------------------------------------------------
 #define int long long 
 int out ( int a , int b ) {
-   return ( ( a % mod ) * ( b % mod )) % mod ; 
+   return ( ( a % mod ) * ( b % mod )) % mod ; // it's the same as ( a * b ) % mod 
 }
 void solve() { 
     int n ; 
@@ -39,9 +39,11 @@ void solve() {
     power[0] = inverse[0] = fact[0] = 1; 
     for ( int i = 0  ; i < n ; i++ ){
        ans += a[i] != b[i]  ; 
-       fact[i + 1] = out ( fact[i] , i + 1 ) ; 
-       power[i+ 1] = out ( power[i] , 2 ) ; 
-       inverse[i+1] = expo ( fact[i+1] , mod - 2 , mod )  ; 
+       fact[i + 1] = out ( fact[i] , i + 1 ) ; // for finding the factorial
+       power[i+ 1] = out ( power[i] , 2 ) ; // for finding the power of 2 
+       inverse[i+1] = expo ( fact[i+1] , mod - 2 , mod )  ; // for finding the inverse of of a number by using fermat little theorem
+      //so it says the inverse of a number x is equal to  x ^ (m-2) mod m 
+     // we can use the modular exponentiation for counting the large number (a ^ b mod p) that's why we used expo function
     }
     if ( ans & 1 ) {
        cout << 0 ; 
